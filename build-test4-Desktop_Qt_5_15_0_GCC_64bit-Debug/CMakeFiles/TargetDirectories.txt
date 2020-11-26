@@ -1,0 +1,3 @@
+/home/nostromo/code/build-test4-Desktop_Qt_5_15_0_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/nostromo/code/build-test4-Desktop_Qt_5_15_0_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/nostromo/code/build-test4-Desktop_Qt_5_15_0_GCC_64bit-Debug/CMakeFiles/test4.dir
