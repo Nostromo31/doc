@@ -6,6 +6,7 @@ using namespace std;
 
 void vengalg(int t, int m)
 {
+    int t1 = t;
     if (t < m) t = t + (m - t);
     double** ptrarr = new double* [t]; //создаем матрицу
     for(int count = 0; count < t; count++)
@@ -48,11 +49,14 @@ void vengalg(int t, int m)
     ptrarr[3][3] = 0.5;
     ptrarr[3][4] = 1;
 
-    if(t == m)
+    if(t1 != m)
     {
-        for (int j = 0; j < m; j++)
+        for (int i = (t - (t-t1)); i < t; i++)
         {
-            ptrarr[4][j] = 0;
+            for (int j = 0; j < m; j++)
+                {
+                    ptrarr[i][j] = 0;
+                }
         }
     }
 
@@ -65,6 +69,7 @@ void vengalg(int t, int m)
     }
 
     double* ptrstrmax = new double [t];
+    double* ptrstrmin = new double [t];
     for (int i = 0; i < t; i++)
     {
         ptrstrmax[i] = 0;
@@ -75,7 +80,8 @@ void vengalg(int t, int m)
         for (int j = 0; j < m; j++)
         {
             if (ptrarr2[i][j] > ptrstrmax[i]) ptrstrmax[i] = ptrarr2[i][j];
-            cout << "[" << i << "]: " << ptrstrmax[i] << endl;
+            ptrstrmin [i] = ptrstrmax [i];
+            //cout << "[" << i << "]: " << ptrstrmax[i] << endl;
         }
     }
 
@@ -89,6 +95,32 @@ void vengalg(int t, int m)
         }
     }
 
+    //double* ptrstrmin = new double [t];
+
+    /*for (int i = 0; i < t; i++)
+    {
+        ptrstrmin [i] = ptrstrmax [i];
+    }*/
+
+    for (int i = 0; i < t; i++)//ищем минимальный элемент в каждой строке
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (ptrarr2[i][j] < ptrstrmin[i]) ptrstrmin[i] = ptrarr2[i][j];
+            //cout << "[" << i << "]: " << ptrstrmax[i] << endl;
+        }
+    }
+
+    for (int i = 0; i < t; i++)//вычитаем его из каждого элемента строки
+    {
+        for (int j = 0; j < m; j++)
+        {
+            //cout << endl << ptrarr2[i][j] << " [" << i << "]" << "[" << j << "] - " << "ptrstrmin[" << i << "] (" << ptrstrmin[i] << ")" <<": " << ptrarr2[i][j] << endl;
+            ptrarr2[i][j] = ((ptrarr2[i][j] - ptrstrmin[i]));
+
+        }
+    }
+
     double* ptrcolmin = new double [m];
     for (int j = 0; j < m; j++)
     {
@@ -97,11 +129,11 @@ void vengalg(int t, int m)
 
 
 
-    for (int i = 0; i < t; i++)//ищем минимальный элемент в каждой строке
+    for (int j = 0; j < m; j++)//ищем минимальный элемент в каждом столбце
     {
-        for (int j = 0; j < m; j++)
+        for (int i = 0; i < t; i++)
         {
-            if(ptrcolmin[i] >= ptrarr2[i][j]) ptrcolmin[i] = ptrarr2[i][j];
+            if(ptrcolmin[j] >= ptrarr2[i][j]) ptrcolmin[j] = ptrarr2[i][j];
         }
     }
 
@@ -121,6 +153,7 @@ void vengalg(int t, int m)
         }
     }*/
 
+    //for (int i = 0; i < )
 
     for (int count_row = 0; count_row < t; count_row++)//оригинал матрицы
     {
@@ -154,6 +187,7 @@ void vengalg(int t, int m)
     delete[] ptrarr;//очищаем память
     delete[] ptrarr2;
     delete[] ptrstrmax;
+    delete[] ptrstrmin;
 }
 
 int main()
